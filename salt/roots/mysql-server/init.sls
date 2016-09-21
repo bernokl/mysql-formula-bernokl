@@ -1,8 +1,6 @@
 install_server:
     pkg.installed:
      - name: mysql-server-5.5
-     - pkgs:
-        - mysql-server-5.5
      - service: running
 
 mysql_debconf:
