@@ -1,4 +1,4 @@
 base:
   '*':
     - global
-    - saltstack-mysql-formula.states.server
+    - mysql-server

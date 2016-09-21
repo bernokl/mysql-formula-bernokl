@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     ## For masterless, mount your salt file root
     config.vm.provider "virtualbox" do |v|
     config.vm.synced_folder "salt/", "/srv", owner: "root", group: "root"
-      v.customize ["modifyvm", :id, "--memory", "256"]
+      v.customize ["modifyvm", :id, "--memory", "1024"]
     end
 
     ## Use all the defaults:
