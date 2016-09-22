@@ -1,8 +1,8 @@
 Vagrant.configure("2") do |config|
     ## Choose your base box
-    config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    config.vm.box_url = "berno/salt-minion-1404"
     config.vm.define "salt-minion"
-    config.vm.box = "trusty"
+    config.vm.box = "berno/salt-minion-1404"
     
     ## For masterless, mount your salt file root
     config.vm.provider "virtualbox" do |v|
