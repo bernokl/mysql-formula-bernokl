@@ -13,6 +13,10 @@ mysql_debconf:
      - require_in:
         - pkg: install_server
 
+common_tools:
+    pkg.installed:
+     - pkgs:
+        - percona-toolkit
 
 mycnf_file:
     file.managed:
