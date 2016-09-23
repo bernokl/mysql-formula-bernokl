@@ -11,6 +11,11 @@ Vagrant.configure("2") do |config|
     end
 # I know you can forward ports and stuff, this is just much easier    
     config.vm.network "private_network", ip: "192.168.50.100"
+## this clears out the minion_id so it gets re-populated
+    config.vm.provision :shell do |shell|
+      shell.inline = "rm -f /etc/salt/minion_id"
+    end
+
 
     ## Use all the defaults:
     config.vm.provision :salt do |salt|

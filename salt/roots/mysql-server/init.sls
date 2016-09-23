@@ -1,3 +1,9 @@
+common_tools:
+    pkg.installed:
+     - pkgs:
+        - percona-toolkit
+        - debconf-utils
+
 install_server:
     pkg.installed:
      - name: mysql-server-5.5
@@ -12,11 +18,6 @@ mysql_debconf:
           'mysql-server/start_on_boot': {'type': 'boolean', 'value': 'true'}
      - require_in:
         - pkg: install_server
-
-common_tools:
-    pkg.installed:
-     - pkgs:
-        - percona-toolkit
 
 mycnf_file:
     file.managed:
