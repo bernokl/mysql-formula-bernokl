@@ -1,16 +1,43 @@
-#!jinja|yaml
+include:
+  - mysql-server.python
+  - mysql-server
 
-{% set datamap = salt['formhelper.get_defaults']('mysql', saltenv) %}
-{% set comp_type = datamap['type'] %}
-{% set comp_data = datamap[comp_type]|default({}) %}
+random_db:
+  mysql_database.present:
+    - name: test_db
+    - character_set: utf8
+    - collate: utf8_general_ci
+    - connection_host: localhost
+    - connection_port: 3306
+    - connection_user: 'root'
+    - connection_pass: 'password'
+    - connection_db: 'mysql'
+    - connection_unix_socket: '/var/run/mysqld/mysqld.sock'
+    - connection_charset: utf8
 
-# SLS includes/ excludes
-include: {{ comp_data.client.sls_include|default(['mysql._salt']) }}
-extend: {{ comp_data.client.sls_extend|default({}) }}
+berno:
+  mysql_user.present:
+    - host: localhost
+    - password: bobcat
+    - connection_host: localhost
+    - connection_port: 3306
+    - connection_user: 'root'
+    - connection_pass: 'password'
+    - connection_db: 'mysql'
+    - connection_unix_socket: '/var/run/mysqld/mysqld.sock'
+    - connection_charset: utf8
 
-{% if comp_data.client.pkgs|default({})|length > 0 %}
-{{ comp_type }}_client:
-  pkg:
-    - installed
-    - pkgs: {{ comp_data.client.pkgs }}
-{% endif %}
+berno_mysql:
+   mysql_grants.present:
+    - grant: all
+    - database: '*.*'
+    - user: berno
+    - host: localhost
+    - connection_host: localhost
+    - connection_port: 3306
+    - connection_user: 'root'
+    - connection_pass: 'password'
+    - connection_db: 'mysql'
+    - connection_unix_socket: '/var/run/mysqld/mysqld.sock'
+    - connection_charset: utf8
+
